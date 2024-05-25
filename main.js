@@ -1,3 +1,4 @@
+import {Cell} from "./Cell.js";
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d',{alpha : false});
 const cellSize = 10;
@@ -7,6 +8,8 @@ const cw = cellSize*cols;
 const ch = cellSize*rows;
 canvas.width = cw;
 canvas.height = ch;
+
+let c1 = new Cell();
 
 
 
