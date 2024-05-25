@@ -1,0 +1,16 @@
+h1{
+    text-align: center;
+}
+.display-canvas{
+    display: flex;
+    justify-content: center;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
+#Board{
+    flex: 1;
+    min-width: 0;
+}
