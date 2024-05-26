@@ -1,14 +1,17 @@
 export class Cell{
-    static color = 'yelow';
-    constructor(){
-        this.state = 0;
+    static color = 'yellow';
+    constructor(x,y){
+        this.state = Math.floor(Math.random()*2);
         this.pos = {
             x : x,
             y : y
         }
+        this.lifeAround = 0;
+        this.neighbors = [];
     }
     evalNeighbors(){
-        //Evaluar vecinos =>
-        this.state = (true) ?  1 : 0
+        let life = 0;
+                //Evaluar vecinos =>
+        //this.state = Math.ceil(Math.random()*2);
     }
 }
