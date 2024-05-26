@@ -9,9 +9,16 @@ export class Cell{
         this.lifeAround = 0;
         this.neighbors = [];
     }
+    /*Méthods*/
     evalNeighbors(){
-        let life = 0;
-                //Evaluar vecinos =>
-        //this.state = Math.ceil(Math.random()*2);
+        this.neighbors.forEach(n => {if(n.state == 1) this.lifeAround++});
+    }
+    updateCell(){
+        if(this.state == 1){
+            if(this.lifeAround != 2 && this.lifeAround != 3) this.state = 0; 
+        }else{
+            if(this.lifeAround == 3) this.state = 1;
+        }
+        this.lifeAround = 0;
     }
 }

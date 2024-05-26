@@ -11,7 +11,6 @@ canvas.width = cw;
 canvas.height = ch;
 
 ctx.fillStyle = Cell.color;
-ctx.fillRect(0,0,cellSize,cellSize);
 initCells();
 initNeighbors();
 console.log(cellsArray)
@@ -50,15 +49,11 @@ function loop(){
     if(frame%5==0){
     ctx.clearRect(0,0,cw,ch);
     //Evaluar vecinos
-    cellsArray.forEach(row => row.forEach(cell => cell.neighbors.forEach(neighbor => {
-        if(neighbor.state==1) cell.lifeAround++;
-    })));
+    cellsArray.forEach(row => row.forEach(cell => cell.evalNeighbors()));
     //update cells
     cellsArray.forEach(row => row.forEach(cell => {
-        if(cell.lifeAround<=1 && cell.state==1) cell.state=0;
-        if(cell.lifeAround>=4 && cell.state==1) cell.state=0;
-        if(cell.lifeAround==3 && cell.state==0) cell.state=1;
-        if(cell.state ==1) ctx.fillRect(cell.pos.x*cellSize,cell.pos.y*cellSize,cellSize,cellSize);
+        cell.updateCell();
+        if(cell.state == 1) ctx.fillRect(cell.pos.x*cellSize,cell.pos.y*cellSize,cellSize,cellSize);
         cell.lifeAround=0;
     }))
     }
