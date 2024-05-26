@@ -28,14 +28,18 @@ function initNeighbors(){
     cellsArray.forEach(row => row.forEach(cell => {
         let x = cell.pos.x;
         let y = cell.pos.y;
-        if(x > 0)cell.neighbors.push(cellsArray[y][x-1])
-        if(x < 79)cell.neighbors.push(cellsArray[y][x+1])
+        if(x > 0){
+            cell.neighbors.push(cellsArray[y][x-1]);
+            if(y > 0)cell.neighbors.push(cellsArray[y-1][x-1]);
+            if(y < rows-1)cell.neighbors.push(cellsArray[y+1][x-1]);
+        }
+        if(x < cols-1){
+            cell.neighbors.push(cellsArray[y][x+1]);
+            if(y > 0)cell.neighbors.push(cellsArray[y-1][x+1]);
+            if(y < rows-1)cell.neighbors.push(cellsArray[y+1][x+1]);
+        }
         if(y > 0)cell.neighbors.push(cellsArray[y-1][x])
-        if(y < 49)cell.neighbors.push(cellsArray[y+1][x])
-        if(x>0 && y>0)cell.neighbors.push(cellsArray[y-1][x-1])
-        if(x<79 && y>0)cell.neighbors.push(cellsArray[y-1][x+1])
-        if(x>0 && y<49)cell.neighbors.push(cellsArray[y+1][x-1])
-        if(x<79 && y<49)cell.neighbors.push(cellsArray[y+1][x+1]) 
+        if(y < rows-1)cell.neighbors.push(cellsArray[y+1][x])
     }));
 }
 
