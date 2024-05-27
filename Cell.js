@@ -1,7 +1,7 @@
 export class Cell{
     static color = 'yellow';
-    static rows = 150;
-    static cols = 240;
+    static rows = 120;
+    static cols = 192;
     static cellsArray = [];
     constructor(x,y){
         this.state = Math.floor(Math.random()*2);
@@ -34,22 +34,40 @@ export class Cell{
         }
         return this.cellsArray;
     }
-    static initNeighbors(){
+    /** static method: initNeighbors()
+     * 
+     * @param {String} space - defines the type of grid space:
+     *                         space = 'limited' by default.
+     *                         space = 'cylindrical' joins columns only
+     *                         space = 'toroidal' joins rows and colums
+     */
+    static initNeighbors(space = "limited"){
+        let arr = this.cellsArray;
         this.cellsArray.forEach(row => row.forEach(cell => {
+            //Variables abreviadas para mejor legibilidad
             let x = cell.pos.x;
             let y = cell.pos.y;
+            let ns = cell.neighbors;
             if(x > 0){
-                cell.neighbors.push(this.cellsArray[y][x-1]);
-                if(y > 0)cell.neighbors.push(this.cellsArray[y-1][x-1]);
-                if(y < this.rows-1)cell.neighbors.push(this.cellsArray[y+1][x-1]);
+                ns.push(arr[y][x-1]);
+                (y > 0) ? ns.push(arr[y-1][x-1]) : (space == "toroidal") ? ns.push(arr[this.rows-1][x-1]) : 0;
+                (y < this.rows-1) ? ns.push(arr[y+1][x-1]) : (space == "toroidal") ? ns.push(arr[0][x-1]) : 0;
+            }else{
+                (space == "cylindrical" || space == "toroidal") ? ns.push(arr[y][this.cols-1]) : 0;
+                (y > 0) ? ns.push(arr[y-1][this.cols-1]) : (space == "toroidal") ? ns.push(arr[this.rows-1][this.cols-1]) : 0;
+                (y < this.rows-1) ? ns.push(arr[y+1][this.cols-1]) : (space == "toroidal") ? ns.push(arr[0][this.cols-1]) : 0;
             }
             if(x < this.cols-1){
-                cell.neighbors.push(this.cellsArray[y][x+1]);
-                if(y > 0)cell.neighbors.push(this.cellsArray[y-1][x+1]);
-                if(y < this.rows-1)cell.neighbors.push(this.cellsArray[y+1][x+1]);
+                ns.push(arr[y][x+1]);
+                (y > 0) ? ns.push(arr[y-1][x+1]) : (space == "toroidal") ? ns.push(arr[this.rows-1][x+1]) : 0;
+                (y < this.rows-1) ? ns.push(arr[y+1][x+1]) : (space == "toroidal") ? ns.push(arr[0][x+1]) : 0;
+            }else{
+                (space == "cylindrical" || space == "toroidal") ? ns.push(arr[y][0]) : 0;
+                (y > 0) ? ns.push(arr[y-1][0]) : (space == "toroidal") ? ns.push(arr[this.rows-1][0]) : 0;
+                (y < this.rows-1) ? ns.push(arr[y+1][0]) : (space == "toroidal") ? ns.push(arr[0][0]) : 0;
             }
-            if(y > 0)cell.neighbors.push(this.cellsArray[y-1][x])
-            if(y < this.rows-1)cell.neighbors.push(this.cellsArray[y+1][x])
+            (y > 0) ? ns.push(arr[y-1][x]) : (space == "toroidal") ? ns.push(arr[this.rows-1][x]) : 0;
+            (y < this.rows-1) ? ns.push(arr[y+1][x]) : (space == "toroidal") ? ns.push(arr[0][x]) : 0;
         }));
     }
 }
