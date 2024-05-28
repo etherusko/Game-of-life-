@@ -10,7 +10,7 @@ const ch = cellSize*rows;
 canvas.width = cw;
 canvas.height = ch;
 ctx.fillStyle = Cell.color;
-Cell.initNeighbors('cylindrical');
+Cell.initNeighbors('toroidal');
 console.log(cellsArray);
 requestAnimationFrame(loop)
 let frame = 0;
