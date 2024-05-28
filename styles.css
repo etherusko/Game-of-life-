@@ -1,16 +1,37 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+header{
+        width: 100%;
+        max-height: 10vh;
+}
 h1{
     text-align: center;
+    font-size: 1.8em;
 }
 .display-canvas{
+    max-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 .container{
     display: flex;
     justify-content: center;
     width: 90%;
+    margin-bottom: 1.5vh;
 }
 #Board{
-    flex: 1;
-    min-width: 0;
+    min-width: 0;   
+    max-height: 72.5vh;
+}
+footer{
+    background-color: aquamarine;
+    display: flex;
+    min-height: 15vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
