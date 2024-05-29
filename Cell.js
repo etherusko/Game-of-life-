@@ -45,29 +45,25 @@ export class Cell{
         let arr = this.cellsArray;
         this.cellsArray.forEach(row => row.forEach(cell => {
             //Variables abreviadas para mejor legibilidad
-            let x = cell.pos.x;
-            let y = cell.pos.y;
-            let ns = cell.neighbors;
-            if(x > 0){
-                ns.push(arr[y][x-1]);
-                (y > 0) ? ns.push(arr[y-1][x-1]) : (space == "toroidal") ? ns.push(arr[this.rows-1][x-1]) : 0;
-                (y < this.rows-1) ? ns.push(arr[y+1][x-1]) : (space == "toroidal") ? ns.push(arr[0][x-1]) : 0;
-            }else{
-                (space == "cylindrical" || space == "toroidal") ? ns.push(arr[y][this.cols-1]) : 0;
-                (y > 0) ? ns.push(arr[y-1][this.cols-1]) : (space == "toroidal") ? ns.push(arr[this.rows-1][this.cols-1]) : 0;
-                (y < this.rows-1) ? ns.push(arr[y+1][this.cols-1]) : (space == "toroidal") ? ns.push(arr[0][this.cols-1]) : 0;
-            }
-            if(x < this.cols-1){
-                ns.push(arr[y][x+1]);
-                (y > 0) ? ns.push(arr[y-1][x+1]) : (space == "toroidal") ? ns.push(arr[this.rows-1][x+1]) : 0;
-                (y < this.rows-1) ? ns.push(arr[y+1][x+1]) : (space == "toroidal") ? ns.push(arr[0][x+1]) : 0;
-            }else{
-                (space == "cylindrical" || space == "toroidal") ? ns.push(arr[y][0]) : 0;
-                (y > 0) ? ns.push(arr[y-1][0]) : (space == "toroidal") ? ns.push(arr[this.rows-1][0]) : 0;
-                (y < this.rows-1) ? ns.push(arr[y+1][0]) : (space == "toroidal") ? ns.push(arr[0][0]) : 0;
-            }
-            (y > 0) ? ns.push(arr[y-1][x]) : (space == "toroidal") ? ns.push(arr[this.rows-1][x]) : 0;
-            (y < this.rows-1) ? ns.push(arr[y+1][x]) : (space == "toroidal") ? ns.push(arr[0][x]) : 0;
+            const x = cell.pos.x;
+            const y = cell.pos.y;
+            const ns = cell.neighbors;
+            const cylindrical = space=='cylindrical';
+            const toroidal = space=='toroidal';
+
+            const isX0 = (x>0) ? x-1 : (cylindrical+toroidal) ? this.cols-1 : undefined;
+            const isY0 = (y>0) ? y-1 : (toroidal) ? this.rows-1 : undefined;
+            const isXMax = (x<this.cols-1) ? x+1 : (cylindrical+toroidal) ? 0 : undefined;
+            const isYMax = (y<this.rows-1) ? y+1 : (toroidal) ? 0 : undefined;
+
+            if(!isNaN(isY0+isX0))ns.push(arr[isY0][isX0]);
+            if(!isNaN(isY0+isXMax))ns.push(arr[isY0][isXMax]);
+            if(!isNaN(isY0+x))ns.push(arr[isY0][x]);
+            if(!isNaN(isYMax+isX0))ns.push(arr[isYMax][isX0]);
+            if(!isNaN(isYMax+isXMax))ns.push(arr[isYMax][isXMax]);
+            if(!isNaN(isYMax+x))ns.push(arr[isYMax][x]);
+            if(!isNaN(y+isX0))ns.push(arr[y][isX0]);
+            if(!isNaN(y+isXMax))ns.push(arr[y][isXMax]);
         }));
     }
 }
