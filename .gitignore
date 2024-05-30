@@ -1,3 +1,5 @@
 .env
 *png
+*svg
 ./capturas
+./sources

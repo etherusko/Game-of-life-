@@ -1,7 +1,9 @@
 export class Cell{
     static color = 'yellow';
     static rows = 120;
+    //static rows = 400;
     static cols = 192;
+    //static cols = 600;
     static cellsArray = [];
     constructor(x,y){
         this.state = Math.floor(Math.random()*2);
@@ -14,11 +16,11 @@ export class Cell{
     }
     /*Methods*/
     evalNeighbors(){
-        this.neighbors.forEach(n => {if(n.state == 1) this.lifeAround++});
+        this.neighbors.forEach(n => this.lifeAround+=n.state);
     }
     updateCell(){
         if(this.state == 1){
-            if(this.lifeAround != 2 && this.lifeAround != 3) this.state = 0; 
+            this.state = (this.lifeAround != 2 && this.lifeAround != 3) ? 0 : 1; 
         }else{
             if(this.lifeAround == 3) this.state = 1;
         }
@@ -50,20 +52,20 @@ export class Cell{
             const ns = cell.neighbors;
             const cylindrical = space=='cylindrical';
             const toroidal = space=='toroidal';
-
+            // [x][y] values considering borderline cases and space type
             const isX0 = (x>0) ? x-1 : (cylindrical+toroidal) ? this.cols-1 : undefined;
             const isY0 = (y>0) ? y-1 : (toroidal) ? this.rows-1 : undefined;
             const isXMax = (x<this.cols-1) ? x+1 : (cylindrical+toroidal) ? 0 : undefined;
             const isYMax = (y<this.rows-1) ? y+1 : (toroidal) ? 0 : undefined;
 
-            if(!isNaN(isY0+isX0))ns.push(arr[isY0][isX0]);
-            if(!isNaN(isY0+isXMax))ns.push(arr[isY0][isXMax]);
-            if(!isNaN(isY0+x))ns.push(arr[isY0][x]);
-            if(!isNaN(isYMax+isX0))ns.push(arr[isYMax][isX0]);
-            if(!isNaN(isYMax+isXMax))ns.push(arr[isYMax][isXMax]);
-            if(!isNaN(isYMax+x))ns.push(arr[isYMax][x]);
-            if(!isNaN(y+isX0))ns.push(arr[y][isX0]);
-            if(!isNaN(y+isXMax))ns.push(arr[y][isXMax]);
+            if(isY0+isX0 >= 0) ns.push(arr[isY0][isX0]);
+            if(isY0+isXMax >= 0) ns.push(arr[isY0][isXMax]);
+            if(isY0+x >= 0) ns.push(arr[isY0][x]);
+            if(isYMax+isX0 >= 0) ns.push(arr[isYMax][isX0]);
+            if(isYMax+isXMax >= 0) ns.push(arr[isYMax][isXMax]);
+            if(isYMax+x >= 0) ns.push(arr[isYMax][x]);
+            if(y+isX0 >= 0) ns.push(arr[y][isX0]);
+            if(y+isXMax >= 0) ns.push(arr[y][isXMax]);
         }));
     }
 }
