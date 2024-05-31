@@ -28,6 +28,7 @@ export class Cell{
     }
     /*Static Methods*/  
     static initCells(){
+        console.log('iniciando cells');
         for(let i=0; i<this.rows; i++){
             this.cellsArray[i]=[]
             for(let j=0; j<this.cols; j++){
