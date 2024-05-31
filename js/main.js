@@ -10,16 +10,17 @@ const ch = cellSize*rows;
 canvas.width = cw;
 canvas.height = ch;
 ctx.fillStyle = Cell.color;
-
-requestAnimationFrame(()=>loop(0));
-export function loop(frame){
-    frame++;
-    if(frame%5==0){
+requestAnimationFrame(loop);    
+export function loop(){
+    if(Cell.frames%5==0){
+        Cell.steps++;
         ctx.clearRect(0,0,cw,ch);
         cellsArray.forEach(row => row.forEach(cell => cell.evalNeighbors()));
         cellsArray.forEach(row => row.forEach(cell => {
             cell.updateCell();
             if(cell.state == 1) ctx.fillRect(cell.pos.x*cellSize,cell.pos.y*cellSize,cellSize,cellSize);
-    }))}
-    requestAnimationFrame(()=>loop(frame));
+        }))
+        console.log(Cell.steps);
+    }
+    requestAnimationFrame(loop);
 }

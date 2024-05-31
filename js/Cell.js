@@ -3,6 +3,8 @@ export class Cell{
     static rows = 120;
     static cols = 192;
     static cellsArray = [];
+    static #frames = 0;
+    static steps = 0;
     constructor(x,y){
         this.state = Math.floor(Math.random()*2);
         this.pos = {
@@ -38,6 +40,7 @@ export class Cell{
             }
         }
         this.#initNeighbors(space);
+        this.steps = this.#frames = 0;
         return this.cellsArray;
     }
     /**Private Method #initNeighbor
@@ -65,5 +68,8 @@ export class Cell{
             if(y+isX0 >= 0) cell.neighbors.push(arr[y][isX0]);
             if(y+isXMax >= 0) cell.neighbors.push(arr[y][isXMax]);
         }));
+    }
+    static get frames() {
+        return this.#frames++;
     }
 }
