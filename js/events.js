@@ -6,5 +6,4 @@ const btnRandom = document.getElementById('btn-random');
 
 btnRandom.addEventListener('click',()=>{
     Cell.initCells();
-    Cell.initNeighbors('toroidal');
     loop()});

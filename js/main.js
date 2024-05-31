@@ -4,15 +4,13 @@ const ctx = canvas.getContext('2d',{alpha : false});
 const cellSize = 10;
 const rows = Cell.rows;
 const cols = Cell.cols;
-const cellsArray = Cell.initCells();
+const cellsArray = Cell.initCells('toroidal');
 const cw = cellSize*cols;
 const ch = cellSize*rows;
 canvas.width = cw;
 canvas.height = ch;
 ctx.fillStyle = Cell.color;
-Cell.initNeighbors('toroidal');
-console.log(cellsArray);
-//let frame = 0;
+
 requestAnimationFrame(()=>loop(0));
 export function loop(frame){
     frame++;
