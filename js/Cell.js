@@ -5,6 +5,8 @@ export class Cell{
     static cellsArray = [];
     static #frames = 0;
     static steps = 0;
+    static #Run = true;
+    static speed = 5;
     constructor(x,y){
         this.state = Math.floor(Math.random()*2);
         this.pos = {
@@ -71,5 +73,13 @@ export class Cell{
     }
     static get frames() {
         return this.#frames++;
+    }
+
+    static get Run(){
+        return this.#Run;
+    }
+
+    static playPause(){
+        this.#Run = this.#Run ? 0 : 1; 
     }
 }

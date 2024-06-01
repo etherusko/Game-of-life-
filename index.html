@@ -24,14 +24,14 @@
                     <button><img src="./sources/brush-1.svg"></button>
                 </div>
                 <div class="btn-container" id="btn-c-2">
-                    <button>
-                        <img src="./sources/play.svg" style="display: none;">
+                    <button id="play-pause">
+                        <img src="./sources/play.svg" hidden>
                         <img src="./sources/pause.svg">
                     </button>
-                    <button><img src="./sources/next.svg"></button>
+                    <button id="btn-next"><img src="./sources/next.svg"></button>
                     <div id="vel-dial">
-                        <span>Velocity</span>
-                        <input type="range"></input>
+                        <span>Speed</span>
+                        <input type="range" id="speed" max="15" min="0" value="10"></input>
                     </div>
                     <button id="btn-random"><img src="./sources/random.svg"></button>
                 </div>
