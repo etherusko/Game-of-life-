@@ -6,25 +6,23 @@
     <title>Game of Life</title>
     <script defer src="./js/main.js" type="module"></script>
     <script defer src="./js/events.js" type="module"></script>
+    <!--<link  rel="stylesheet" href="./styles.css">-->
     <link  rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <section class="display-canvas">
-        <header>
+    <section id="display-canvas">
+        <header class="container">
             <h1>Game of life</h1>
         </header>
-        <div class="container">
+        <div class="container" id="game-of-life">
             <canvas id="Board"></canvas>
         </div>
-        <footer>
+        <footer class="container">
             <p>This canvas is set in toroidal mode.</p>
-            <div class="container" id="c-2">
-                <div class="btn-container" id="btn-c-1">
-                    <button><img src="./sources/settings1.svg"></button>
-                    <button><img src="./sources/brush-1.svg"></button>
-                </div>
+            <div id="container-2">
                 <div class="btn-container" id="btn-c-2">
                     <button id="play-pause">
+                        <svg class="icon"><use xlink:href="./icons/sprite.svg#play"></use></svg>
                         <img src="./sources/play.svg" hidden>
                         <img src="./sources/pause.svg">
                     </button>

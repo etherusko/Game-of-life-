@@ -1,5 +1,4 @@
 .env
-*png
-*svg
-./capturas
-./sources
+capturas
+sources
+styles2.css
