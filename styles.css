@@ -6,28 +6,24 @@ html,body{
     display: flex;
     flex-direction: column;
     height: 100vh;
-
     max-height: 100vh;
+    background: #323339
 }
 .container{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-/*Containers*/
 header{
-    /*flex: 1;*/
     height: 10vh;
     justify-content: center;
-    background: yellowgreen;
 }
 h1{
+    color: #b5b768;;
     font-size: clamp(10px,7vh,40px);
 }
 #game-of-life{
-    /*flex: 8;*/
     margin: 1vh 0;
-    background: violet;
 }
 #Board{
     min-width: 0;
@@ -35,11 +31,10 @@ h1{
     max-height: 71vh;
 }
 footer{
-    /*flex: 1;*/
     height: 17vh;
     justify-content: flex-end;
-    background: slateblue;
-    position: relative;
+    background: #40425b;
+    position:  relative;
 }
 footer p{
     position: absolute;
@@ -73,12 +68,13 @@ footer p{
     font-size: max(12px, 3.5vh);
 }
 button{
-    /*height: 6vh;*/
     display: flex;
     border: 0;
+    border-radius: 42%;
+    background: transparent;
 }
 button:hover{
-    background: coral;
+    background: #d9e1de29
 }
 button img,svg{
     height: clamp(20px,11vh,60px);

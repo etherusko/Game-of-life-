@@ -2,8 +2,7 @@ import {Cell} from "./Cell.js";
 import {ctx,cellSize,updateCanvas} from "./main.js";
 const btnRandom = document.getElementById('btn-random');
 const btnPlay = document.getElementById('play-pause');
-const play = btnPlay.getElementsByTagName('img').item(0);
-const pause = btnPlay.getElementsByTagName('img').item(1);
+const play = document.querySelector('#play-icon use');
 const btnNext = document.getElementById('btn-next');
 const iptSpeed = document.getElementById('speed');
 
@@ -16,7 +15,7 @@ btnRandom.addEventListener('click',()=>{
 });
 btnPlay.addEventListener('click',()=>{
     Cell.playPause();
-    play.hasAttribute('hidden') ? changePlaybtn(play,pause) : changePlaybtn(pause,play);
+    changePlaybtn(play.getAttribute('xlink:href')=="./icons/sprite.svg#play");
 });
 btnNext.addEventListener('click',()=>{
     updateCanvas();
@@ -25,7 +24,6 @@ iptSpeed.addEventListener('input',()=> {
     Cell.speed = 16-iptSpeed.value;
 })
 
-function changePlaybtn(a,b){
-    a.removeAttribute('hidden');
-    b.setAttribute('hidden',"");
+function changePlaybtn(bool){
+bool ? play.setAttribute('xlink:href',"./icons/sprite.svg#pause") : play.setAttribute('xlink:href',"./icons/sprite.svg#play");
 }
